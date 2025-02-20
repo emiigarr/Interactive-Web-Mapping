@@ -191,12 +191,12 @@
                 });
             });
 
-            map.on('mousemove', ({point}) => {
-                const state = map.queryRenderedFeatures(point, {
+            map.on('mousemove', (e) => {
+                const counties = map.queryRenderedFeatures(e.point, {
                     layers: ['covid-layer']
                 });
-                document.getElementById('text-description').innerHTML = county.length ?
-                    `<h3>${county[0].properties.name}</h3><p><strong><em>${county[0].properties.casePer10K}</strong> cases per 10K people</em></p>` :
+                document.getElementById('text-description').innerHTML = counties.length ?
+                    `<h3>${counties[0].properties.name}</h3><p><strong><em>${counties[0].properties.casePer10K}</strong> cases per 10K people</em></p>` :
                     `<p>Hover over a County!</p>`;
             });
         }
