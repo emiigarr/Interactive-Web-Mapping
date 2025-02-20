@@ -95,7 +95,7 @@
     <div class='map-overlay' id='features'>
         <h2>Washington State COIVD-19 Cases Rate per 10K (Oct 25, 2021)</h2>
         <div id='text-description'>
-            <p>Hover over a state!</p>
+            <p>Hover over a County!</p>
         </div>
     </div>
     <div class='map-overlay' id='legend'></div>
@@ -130,19 +130,19 @@
                             'step',
                             ['get', 'casePer10k'],
                             '#FFEDA0',   // stop_output_0
-                            10,          // stop_input_0
+                            50,          // stop_input_0
                             '#FED976',   // stop_output_1
-                            20,          // stop_input_1
+                            100,          // stop_input_1
                             '#FEB24C',   // stop_output_2
-                            50,          // stop_input_2
+                            200,          // stop_input_2
                             '#FD8D3C',   // stop_output_3
-                            100,         // stop_input_3
+                            500,         // stop_input_3
                             '#FC4E2A',   // stop_output_4
-                            200,         // stop_input_4
+                            1000,         // stop_input_4
                             '#E31A1C',   // stop_output_5
-                            500,         // stop_input_5
+                            2000,         // stop_input_5
                             '#BD0026',   // stop_output_6
-                            1000,        // stop_input_6
+                            3000,        // stop_input_6
                             "#800026"    // stop_output_7
                         ],
                         'fill-outline-color': '#FFFFFF',
@@ -151,14 +151,14 @@
                 });
 
                 const layers = [
-                    '0-9',
-                    '10-19',
-                    '20-49',
+                    '0-49',
                     '50-99',
                     '100-199',
                     '200-499',
                     '500-999',
-                    '1000 and more'
+                    '1000-1999',
+                    '2000-3000',
+                    '4000 and more'
                 ];
                 const colors = [
                     '#FFEDA070',
@@ -195,9 +195,9 @@
                 const state = map.queryRenderedFeatures(point, {
                     layers: ['covid-layer']
                 });
-                document.getElementById('text-description').innerHTML = state.length ?
-                    `<h3>${state[0].properties.name}</h3><p><strong><em>${state[0].properties.density}</strong> people per square mile</em></p>` :
-                    `<p>Hover over a state!</p>`;
+                document.getElementById('text-description').innerHTML = county.length ?
+                    `<h3>${county[0].properties.name}</h3><p><strong><em>${county[0].properties.casesPer10K}</strong> cases per 10K people</em></p>` :
+                    `<p>Hover over a County!</p>`;
             });
         }
 
